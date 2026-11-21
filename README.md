@@ -87,12 +87,43 @@ Non-SMOTE models use threshold 0.5. Train metrics are the last training epoch (d
 
 ## Limitations
 
-- Single run per configuration; differences below ~1 point should not be interpreted as real.
-- Only two thresholds were compared for SMOTENC; no systematic threshold search.
-- No unweighted baseline for the non-SMOTE models, and SMOTENC was not combined with `pos_weight` in the final notebook (an earlier exploratory run with `pos_weight` at th = 0.75 reached a test F1 of about 0.68).
-- No ROC-AUC / PR-AUC and no tree-based baseline (e.g. XGBoost), so the "ceiling" claim is supported only by the MLP variants tested here.
-- The datasets differ in row composition, so their test sets are not identical.
-- t-SNE/PCA were computed on the numeric features only.
+Limitations and Future Improvements
+
+Despite the experiments and comparisons, this project has several limitations:
+
+Single-run experiments: Each configuration was evaluated using only one random seed (42). Therefore, performance differences smaller than approximately one percentage point should not be considered statistically significant.
+
+Limited threshold search: Only two decision thresholds (0.6 and 0.75) were evaluated for SMOTENC. A systematic threshold optimization was not performed.
+
+Missing baseline comparison: An unweighted baseline model was not evaluated for the non-SMOTE experiments.
+
+SMOTENC and class weighting: The final experiments did not combine SMOTENC with pos_weight, although an earlier exploratory experiment achieved a test F1-score of approximately 0.68 using this combination.
+
+Limited evaluation metrics: ROC-AUC and PR-AUC were not calculated.
+
+No tree-based baseline: Models such as XGBoost were not included for comparison. Therefore, conclusions about the performance ceiling are limited to the MLP architectures evaluated in this project.
+
+Different test sets: The datasets created through different missing-value handling strategies have different row compositions, meaning their test sets are not identical.
+
+Dimensionality reduction: PCA and t-SNE were performed using numerical features only.
+
+## Future Improvements
+
+Potential directions for further investigation include:
+
+Repeating experiments across multiple random seeds and reporting mean and standard deviation.
+
+Performing systematic decision-threshold optimization.
+
+Comparing weighted and unweighted baseline models.
+
+Combining SMOTENC with class weighting.
+
+Evaluating ROC-AUC and PR-AUC.
+
+Comparing MLPs against tree-based models such as XGBoost and Random Forest.
+
+Exploring dimensionality reduction using both numerical and categorical features.
 
 ## Run it
 
